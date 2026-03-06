@@ -1,0 +1,19 @@
+[Unit]
+Description=Podman trino-lakehouse container
+Wants=network-online.target
+After=network-online.target
+RequiresMountsFor=/run/containers/storage
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Restart=always
+TimeoutStopSec=70
+ExecStartPre=-/usr/bin/podman rm -f trino-lakehouse
+ExecStart=/usr/bin/podman run --name trino-lakehouse --network host \
+    -v /home/trino_admin/trino-server/etc:/etc/trino \
+    docker.io/trinodb/trino:latest
+ExecStop=/usr/bin/podman stop -t 10 trino-lakehouse
+Type=simple
+
+[Install]
+WantedBy=default.target
