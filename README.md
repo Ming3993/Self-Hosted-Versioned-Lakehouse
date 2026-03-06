@@ -26,7 +26,7 @@ Traditional Data Lakes suffer from the "Dirty Read" problem.
 
 * Allows independent scaling of the Query Layer (**Trino**) and Storage Layer (**MinIO**), optimizing resource usage within the LXC infrastructure.
 
-### 5.Why Trino instead of Spark SQL for Querying?
+### 5. Why Trino instead of Spark SQL for Querying?
 
 While Spark is excellent for heavy ETL processes, Trino was chosen as the serving layer for the following reasons:
 
